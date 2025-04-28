@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Серверы -->
+        <TextView
+            android:text="Серверы"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginTop="8dp"/>
+
+        <LinearLayout
+            android:id="@+id/serverListLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="8dp">
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/buttonAddServer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Добавить сервер"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Видео -->
+        <TextView
+            android:text="Видео"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginTop="24dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp">
+            <TextView android:text="Стандартная скорость: " android:textSize="16sp"/>
+            <TextView android:id="@+id/textDefaultSpeed" android:textSize="16sp" android:layout_marginStart="8dp"/>
+            <Button android:id="@+id/buttonChangeSpeed" android:text="Изменить" android:layout_marginStart="8dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp">
+            <TextView android:text="Стандартное разрешение: " android:textSize="16sp"/>
+            <TextView android:id="@+id/textDefaultQuality" android:textSize="16sp" android:layout_marginStart="8dp"/>
+            <Button android:id="@+id/buttonChangeQuality" android:text="Изменить" android:layout_marginStart="8dp"/>
+        </LinearLayout>
+
+        <!-- Debug -->
+        <TextView
+            android:text="Debug"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginTop="24dp"/>
+
+        <Button
+            android:id="@+id/buttonReconnect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Переподключиться к серверам"
+            android:layout_marginTop="8dp"/>
+
+    </LinearLayout>
+</ScrollView>
