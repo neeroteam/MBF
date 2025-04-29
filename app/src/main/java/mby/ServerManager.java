@@ -36,19 +36,19 @@ public class ServerManager {
                 for (String baseUrl : serverUrls) {
                     String url = ensureUrl(baseUrl) + "categories.json";
                     Log.d(TAG, "URL категорий: " + url);
-                    try {
+            try {
                         URL categoriesUrl = new URL(url);
                         HttpURLConnection connection = (HttpURLConnection) categoriesUrl.openConnection();
-                        connection.setRequestMethod("GET");
+                connection.setRequestMethod("GET");
                         Log.d(TAG, "Код ответа: " + connection.getResponseCode());
 
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                        StringBuilder response = new StringBuilder();
-                        String line;
-                        while ((line = reader.readLine()) != null) {
-                            response.append(line);
-                        }
-                        reader.close();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+                reader.close();
 
                         Log.d(TAG, "Получен ответ: " + response.toString());
                         JSONObject categoriesJson = new JSONObject(response.toString());

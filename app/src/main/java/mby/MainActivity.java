@@ -142,8 +142,8 @@ public class MainActivity extends FragmentActivity {
                             try {
                                 Intent intent = new Intent(MainActivity.this, VideoPlayerActivity.class);
                                 intent.putExtra("videoUrl", url);
-                                intent.putExtra("title", movie.getTitle());
-                                startActivity(intent);
+                            intent.putExtra("title", movie.getTitle());
+                            startActivity(intent);
                             } catch (Exception e) {
                                 Log.e(TAG, "Ошибка запуска видео", e);
                                 Toast.makeText(MainActivity.this, 
@@ -194,7 +194,7 @@ public class MainActivity extends FragmentActivity {
 
     private void showAddServerDialog(java.util.Set<String> servers) {
         final android.widget.EditText input = new android.widget.EditText(this);
-        input.setHint("IP или домен, например: 192.168.0.122 или maybeyoou.ddns.net");
+        input.setHint("IP или домен, например: 192.168.0.1 ");
         new android.app.AlertDialog.Builder(this)
             .setTitle("Добавить сервер")
             .setView(input)
@@ -246,7 +246,7 @@ public class MainActivity extends FragmentActivity {
     private void showDebugDialog() {
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
         builder.setTitle("Debug");
-        builder.setMessage("version 1.0 by maybeyoou");
+        builder.setMessage("version 1.0.6 by maybeyoou");
         builder.setPositiveButton("Переподключиться к серверам", (dialog, which) -> {
             loadCategories();
         });

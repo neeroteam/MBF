@@ -18,6 +18,8 @@ import android.app.AlertDialog;
 import android.widget.ProgressBar;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import mby.utils.VideoProgressManager;
+import mby.utils.VideoProgress;
 
 public class VideoPlayerActivity extends AppCompatActivity {
     private ExoPlayer player;
@@ -30,11 +32,23 @@ public class VideoPlayerActivity extends AppCompatActivity {
     private TextView speedTextView;
     private ProgressBar progressBar;
     private AlertDialog speedDialog;
+    private VideoProgressManager progressManager;
+    private String currentVideoUrl;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_player);
+
+        // Получаем ID пользователя (в реальном приложении это должно быть из системы авторизации)
+        userId = getIntent().getStringExtra("user_id");
+        if (userId == null) {
+            userId = "default_user"; // Временное решение для демонстрации
+        }
+
+        progressManager = new VideoProgressManager(this);
+        currentVideoUrl = getIntent().getStringExtra("video_url");
 
         String videoUrl = getIntent().getStringExtra("videoUrl");
         if (videoUrl == null) {
@@ -107,6 +121,9 @@ public class VideoPlayerActivity extends AppCompatActivity {
 
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
+
+        // Восстанавливаем позицию просмотра
+        restoreProgress();
     }
 
     private void togglePlayPause() {
@@ -164,10 +181,30 @@ public class VideoPlayerActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        if (player != null) {
+            long position = player.getCurrentPosition();
+            long duration = player.getDuration();
+            progressManager.saveProgress(currentVideoUrl, position, duration);
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         if (player != null) {
+            long position = player.getCurrentPosition();
+            long duration = player.getDuration();
+            progressManager.saveProgress(currentVideoUrl, position, duration);
             player.release();
+        }
+    }
+
+    private void restoreProgress() {
+        VideoProgress progress = progressManager.getProgress(currentVideoUrl);
+        if (progress != null && !progress.isCompleted()) {
+            player.seekTo(progress.getLastPosition());
         }
     }
 } 
